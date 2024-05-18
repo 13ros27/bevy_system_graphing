@@ -72,10 +72,10 @@ pub fn shorten_pair(func1: FunctionName, func2: FunctionName) -> (String, String
             func2name.push_str(sect2.last().unwrap());
         }
 
-        if func1name.chars().last() == Some(',') {
+        if func1name.ends_with(',') {
             func1name.push(' ');
         }
-        if func2name.chars().last() == Some(',') {
+        if func2name.ends_with(',') {
             func2name.push(' ');
         }
     }

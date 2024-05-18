@@ -1,7 +1,7 @@
 use bevy::{
     prelude::*,
     render::camera::RenderTarget,
-    text::{FontAtlasSets, FontAtlasWarning, TextPipeline, TextSettings, YAxisOrientation},
+    text::{FontAtlasSets, TextPipeline, TextSettings, YAxisOrientation},
     window::WindowRef,
 };
 
@@ -16,10 +16,9 @@ pub fn setup(
     mut text_pipeline: ResMut<TextPipeline>,
     fonts: Res<Assets<Font>>,
     mut font_atlas_sets: ResMut<FontAtlasSets>,
-    mut texture_atlases: ResMut<Assets<TextureAtlas>>,
+    mut texture_atlas_layouts: ResMut<Assets<TextureAtlasLayout>>,
     mut textures: ResMut<Assets<Image>>,
     text_settings: Res<TextSettings>,
-    mut font_atlas_warning: ResMut<FontAtlasWarning>,
 ) {
     let window_comp = Window {
         title: "Schedule Graph".to_string(),
@@ -113,14 +112,13 @@ pub fn setup(
                             },
                         )],
                         scale_factor,
-                        TextAlignment::Left,
+                        JustifyText::Left,
                         bevy::text::BreakLineOn::NoWrap,
                         Vec2::new(f32::INFINITY, f32::INFINITY),
                         &mut font_atlas_sets,
-                        &mut texture_atlases,
+                        &mut texture_atlas_layouts,
                         &mut textures,
                         text_settings.as_ref(),
-                        &mut font_atlas_warning,
                         YAxisOrientation::BottomToTop,
                     ) {
                         Err(e) => panic!("{:?}", e),
